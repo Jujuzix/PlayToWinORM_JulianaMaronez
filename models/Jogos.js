@@ -3,8 +3,9 @@ const {DataTypes} = require("sequelize");
 
 const Jogos = db.define("Jogos",{
     id:{
-        type:DataTypes.NUMBER,
-        require: true,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     titulo:{
         type:DataTypes.STRING,
