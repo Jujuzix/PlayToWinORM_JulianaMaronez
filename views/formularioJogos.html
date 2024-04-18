@@ -6,20 +6,24 @@
     <title>Document</title>
 </head>
 <body>
+    <!--Começo do formulário, o action vai definir aonde estes dados serão enviados.-->
     <form action="/jogos/novo" method="post">
         <div>
+            <!--Campo para inserir o titulo-->
             <label for="titulo">Titulo</label>
-            <input type="text" id="titulo">
+            <input type="text" id="titulo" name="titulo">
         </div>
 
         <div>
+             <!--Campo para inserir a descrição-->
             <label for="descricao">descrição</label>
-            <input type="text" id="descricao">
+            <input type="text" id="descricao" name="descricao">
         </div>
 
         <div>
+             <!--Campo para inserir o preço-->
             <label for="preco">Preço</label>
-            <input type="text" id="preco">
+            <input type="text" id="preco" name="preco">
         </div>
         <input type="submit" value="Cadastrar"/>
     </form>

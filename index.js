@@ -1,8 +1,10 @@
+// index.js
+
 require('dotenv').config();
+const express = require("express");
 const conn = require('./db/conn');
 const Jogos = require("./models/Jogos")
 
-const express = require("express");
 const app = express();
 
 app.use(
@@ -13,10 +15,12 @@ app.use(
 
 app.use(express.json());
 
+// Rota para ser exibido o formulário para ser inserido os dados
 app.get("/jogos/novo", (req, res) =>{
     res.sendFile(`${__dirname}/views/formularioJogos.html`); 
 })
-    
+
+//Rota para criar um novo dado    
     app.post("/jogos/novo", async (req, res) =>{
       const dadosJogos ={
         titulo: req.body.titulo,
@@ -28,11 +32,12 @@ app.get("/jogos/novo", (req, res) =>{
       res.send("Jogo inserido sob o id" + jogos.id);
     })
 
+    //Comando para iniciar o servidor
     app.listen(8000, () => {
         console.log("Server rodando!");
     })
-/*const Usuario = require('./models/Usuario');*/
 
+// Sincroniza o modelo com o seu banco de dados
 conn
    .sync()
    .then(() => {
@@ -44,7 +49,7 @@ conn
 
 
 
-
+/*const Usuario = require('./models/Usuario');*/
 /*conn
 .authenticate()
 .then(() => {
