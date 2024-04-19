@@ -16,7 +16,7 @@ const Jogos = db.define("Jogos",{
         require: true,
     },
     preco:{
-        type:DataTypes.DOUBLE,
+        type:DataTypes.NUMBER,
         require: true,
     }
 });

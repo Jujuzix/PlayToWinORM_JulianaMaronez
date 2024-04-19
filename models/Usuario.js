@@ -1,4 +1,4 @@
-const db = require('../db/conn')
+/*const db = require('../db/conn')
 const {DataTypes} = require("sequelize");
 
 const Usuario = db.define("Usuario",{
@@ -13,3 +13,4 @@ const Usuario = db.define("Usuario",{
 });
 
 module.exports = Usuario;
+*/
