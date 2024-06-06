@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
+
+    <h1>Formulário para Inserir os Usuários</h1>
+    <!--Começo do formulário, o action vai definir aonde estes dados serão enviados.-->
+    <form action="/usuario/novo" method="post">
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="nickname">Nickname</label>
+            <input type="text" id="nickname" name="nickname">
+        </div>
+
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome">
+        </div>
+
+        <input type="submit" value="Cadastrar" />
+    </form>
+
+    <style>
     * {
         margin: 0;
         padding: 0;
@@ -65,30 +77,3 @@
         color: #333;
     }
 </style>
-
-<body>
-    <h1>Formulário para Inserir os Jogos</h1>
-    <!--Começo do formulário, o action vai definir aonde estes dados serão enviados.-->
-    <form action="/jogos/novo" method="post">
-        <div>
-            <!--Campo para inserir o titulo-->
-            <label for="titulo">Titulo</label>
-            <input type="text" id="titulo" name="titulo">
-        </div>
-
-        <div>
-            <!--Campo para inserir a descrição-->
-            <label for="descricao">descrição</label>
-            <input type="text" id="descricao" name="descricao">
-        </div>
-
-        <div>
-            <!--Campo para inserir o preço-->
-            <label for="preco">Preço</label>
-            <input type="text" id="preco" name="preco">
-        </div>
-        <input type="submit" value="Cadastrar" />
-    </form>
-</body>
-
-</html>
