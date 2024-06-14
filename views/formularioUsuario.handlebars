@@ -1,8 +1,12 @@
 
-
-    <h1>Formulário para Inserir os Usuários</h1>
-    <!--Começo do formulário, o action vai definir aonde estes dados serão enviados.-->
-    <form action="/usuario/novo" method="post">
+{{#if usuarios}}
+    <h1>Atualizar Cadastro</h1>
+    <form action="/usuarios/{{usuario.id}}/atualizar" method="post">
+    {{else}}
+      <h1>Cadastre-se</h1>
+     <form action="/usuarios/formularioUsuario" method="post">
+         
+         {{/if}}
         <div>
             <!--Campo para inserir o titulo-->
             <label for="nickname">Nickname</label>
@@ -14,8 +18,13 @@
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome">
         </div>
-
+        
+      {{#if usuarios}}
+       <input type="submit" value="Salvar" />
+        {{else}}
         <input type="submit" value="Cadastrar" />
+        {{/if}}
+       
     </form>
 
     <style>
