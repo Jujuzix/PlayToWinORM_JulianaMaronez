@@ -1,28 +1,35 @@
-{{#if usuarios}}
-<h1>Atualizar Cadastro</h1>
-<form action="/usuarios/{{usuario.id}}/atualizar" method="post">
-    {{else}}
-    <h1>Cadastre-se</h1>
-    <form action="/usuarios/formularioUsuario" method="post">
 
-        {{/if}}
+    <h1>Cadastre-se</h1>
+    <form action="/usuarios/{{id}}/novoCartao" method="post">
+
+       
         <div>
             <!--Campo para inserir o titulo-->
-            <label for="nickname">Nickname</label>
-            <input type="text" id="nickname" name="nickname">
+            <label for="numero">Número</label>
+            <input
+      type="text"
+      maxlength="16"
+      minlength="16"
+      id="numero"
+      name="numero"
+    />
         </div>
 
         <div>
-            <!--Campo para inserir o titulo-->
+            <!--Campo para inserir o nome-->
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome">
         </div>
 
-        {{#if usuarios}}
-        <input type="submit" value="Salvar" />
-        {{else}}
+           <div>
+            <!--Campo para inserir o titulo-->
+            <label for="nome">Cod de Segurança</label>
+            <input type="text" id="nome" name="nome">
+        </div>
+
+
         <input type="submit" value="Cadastrar" />
-        {{/if}}
+    
 
     </form>
 

@@ -1,6 +1,6 @@
-<h1>Usuários</h1>
+<h1>Cadastrar Cartões</h1>
 
-<a href="/usuarios/formularioUsuario">Cadastrar usuário</a>
+<a href="/usuarios/{{usuario.id}}/novoCartao">Cadastrar Cartão</a>
 <table border="1">
     <tr>
         <th>Nickname</th>
@@ -16,7 +16,6 @@
                 <input name="id" type="hidden" value="{{this.id}}" />
                 <input type="submit" value="excluir" />
             </form>
-            <a href="/usuarios/{{this.id}}/cartoes">Ver Cartões</a>
         </td>
     </tr>
     {{/each}}

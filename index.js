@@ -7,6 +7,7 @@ const Jogos = require("./models/Jogos")
 const Usuario = require('./models/Usuario');
 //novo
 const handlebars = require("express-handlebars");
+const Cartao = require('./models/Cartao');
 
 const app = express();
 
@@ -74,7 +75,46 @@ app.post("/usuarios/excluir", async (req, res) => {
     } else {
         res.send("Erro ao excluir usuário!")
     }
-})
+});
+
+//Rotas Cartões
+//Ver cartões do usuário
+app.get("/usuarios/:id/cartoes", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const usuario = await Usuario.findByPk(id, { include: ["Cartoes"]});
+    
+    let cartoes = usuario.Cartao;
+    cartoes = cartoes.map((cartao) => cartao.toJson())
+    
+
+    res.render("cartoes.handlebars", { usuario, cartoes });
+});
+
+//Formulário de cadastro de cartão
+app.get("/usuarios/:id/novoCartao", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const usuario = await Usuario.findByPk(id, { raw: true });
+
+    res.render("formCartao", { usuario });
+});
+
+//Cadastro de cartão
+app.post("/usuarios/:id/novoCartao", async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const dadosCartao = {
+        numero: req.body.numero,
+        nome: req.body.nome,
+        codSeguranca: req.body.codSeguranca,
+        UsuarioId: id,
+    };
+
+    await Cartao.create(dadosCartao);
+
+    res.redirect(`/usuarios/${id}/cartoes`);
+});
+
+
 
 //Comando para iniciar o servidor
 app.listen(8000, () => {
