@@ -1,9 +1,9 @@
 const db = require("../db/conn");
 const { DataTypes } = require("sequelize");
 
-const Usuario = require("../models/Usuario");
+const Usuario = require("./Usuario");
 
-const Cartao = conn.define(
+const Cartao = db.define(
     "Cartao",
     {
         numero: {

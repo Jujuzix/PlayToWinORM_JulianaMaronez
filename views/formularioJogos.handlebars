@@ -1,0 +1,93 @@
+{{#if jogos}}
+<h1>Atualizar Cadastro</h1>
+<form action="/jogos/{{jogo.id}}/atualizar" method="post">
+    {{else}}
+    <h1>Cadastre-se</h1>
+    <form action="/jogos/formularioJogos" method="post">
+
+        {{/if}}
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" name="titulo">
+        </div>
+
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="descricao">Descrição</label>
+            <input type="text" id="decricao" name="descricao">
+        </div>
+
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="preco">Preço</label>
+            <input type="text" id="preco" name="preco">
+        </div>
+
+        {{#if jogos}}
+        <input type="submit" value="Salvar" />
+        {{else}}
+        <input type="submit" value="Cadastrar" />
+        {{/if}}
+
+    </form>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Formulário */
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #b6b3b3;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+        }
+
+        /* campos de entrada */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #737373;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /*  botão de envio */
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* hover para o botão de envio ao passar o mouse */
+        input[type="submit"]:hover {
+            background-color: #45a049;
+
+        }
+
+        /* título */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>

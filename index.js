@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const express = require("express");
 const conn = require('./db/conn');
-const Jogos = require("./models/Jogos")
+const Jogos = require("./models/Jogo")
 const Usuario = require('./models/Usuario');
 //novo
 const handlebars = require("express-handlebars");
@@ -18,6 +18,7 @@ app.set("view engine", "handlebars");
 app.use(express.urlencoded({ urlencoded: true }));
 app.use(express.json());
 
+//Usuário
 app.get("/usuarios/formularioUsuario", (req, res) => {
     res.render(`formularioUsuario`);
 })
@@ -77,17 +78,78 @@ app.post("/usuarios/excluir", async (req, res) => {
     }
 });
 
+//Jogos
+
+app.get("/jogos/formularioJogos", (req, res) => {
+    res.render(`formularioJogos`);
+});
+
+app.post("/jogos/formularioJogos", async (req, res) => {
+    const dadosJogos = {
+        titulo: req.body.titulo,
+        descricao: req.body.descricao,
+        preco: req.body.preco
+    };
+    const jogo = await Jogos.create(dadosJogos);
+
+    res.send(`Jogo Cadastrado com o id ${jogo.id} <a href="/jogos/formularioJogos">Voltar</a>`)
+});
+
+app.get("/", (req, res) => {
+    res.render(home);
+});
+
+app.get("/jogos", async(req, res) => {
+    const jogos = await Jogos.findAll({raw:true});
+    res.render("jogos", {jogos})
+});
+
+app.get("jogos/:id/atualizar", async(req, res) => {
+    const id = req.params.id;
+
+    const dadosJogos = {
+        titulo: req.body.titulo,
+        descricao: req.body.descricao,
+        preco: req.body.preco
+    }
+     const registroAfetados = await Usuario.update(dadosJogos, {where: {id: id}})
+      if (registroAfetados > 0) {
+        res.redirect("/jogos")
+      } else {
+        res.send("Erro ao atualizar Jogo!")
+      }
+});
+
+app.post("/jogos/excluir", async (req, res) => {
+    const id = req.body.id;
+
+    const registroAfetados = await Jogos.destroy({
+        where:{ id:id},
+    })
+     if (registroAfetados > 0){
+        res.redirect("/jogos");
+     } else {
+        res.send("Erro ao excluir Jogo.")
+     }
+});
+
+
+
+
+
+
+
 //Rotas Cartões
 //Ver cartões do usuário
 app.get("/usuarios/:id/cartoes", async (req, res) => {
     const id = parseInt(req.params.id);
-    const usuario = await Usuario.findByPk(id, { include: ["Cartoes"]});
-    
-    let cartoes = usuario.Cartao;
-    cartoes = cartoes.map((cartao) => cartao.toJson())
-    
+    const usuario = await Usuario.findByPk(id, { include: ["Cartaos"] });
 
-    res.render("cartoes.handlebars", { usuario, cartoes });
+    let cartoes = usuario.Cartaos;
+    cartoes = cartoes.map((cartao) => cartao.toJSON())
+
+
+    res.render("cartoes.handlebars", { usuario: usuario.toJSON(), cartoes });
 });
 
 //Formulário de cadastro de cartão
@@ -147,19 +209,3 @@ conn
 
 
 
-/*app.get("/jogos/novo", (req, res) => {
-    res.sendFile(`${__dirname}/views/formularioJogos.html`);
-})
-
-//Rota para criar um novo dado de jogo    
-app.post("/jogos/novo", async (req, res) => {
-    const dadosJogos = {
-        titulo: req.body.titulo,
-        descricao: req.body.descricao,
-        preco: req.body.preco
-    };
-
-    const jogos = await Jogos.create(dadosJogos);
-    res.send("Jogo inserido sob o id" + jogos.id);
-})
-*/
