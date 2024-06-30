@@ -1,18 +1,16 @@
 <h1>Cadastrar Cartões</h1>
 
-<a href="/usuarios/{{usuario.id}}/novoCartao">Cadastrar Cartão</a>
+<a href="/jogo/{{jogo.id}}/novaConquista">Cadastrar Conquista</a>
 <table border="1">
     <tr>
-        <th>Número</th>
-        <th>Nome</th>
-        <th>Cod de segurança</th>
-    </tr>
-    {{#each cartoes}}
-    <tr>
-        <td>{{this.numero}}</td>
-        <td>{{this.nome}}</td>
-        <td>{{this.codSeguranca}}</td>
+        <th>Nome do Jogador</th>
+        <th>Nome da Conquista</th>
         
+    </tr>
+    {{#each conquista}}
+    <tr>
+        <td>{{this. nomeJogador}}</td>
+        <td>{{this.conquistaAdq}}</td>
     </tr>
     {{/each}}
 </table>

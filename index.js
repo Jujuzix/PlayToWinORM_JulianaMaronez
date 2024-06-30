@@ -8,6 +8,8 @@ const Usuario = require('./models/Usuario');
 //novo
 const handlebars = require("express-handlebars");
 const Cartao = require('./models/Cartao');
+const Jogo = require('./models/Jogo');
+const Conquista = require('./models/Conquista');
 
 const app = express();
 
@@ -112,12 +114,12 @@ app.get("jogos/:id/atualizar", async(req, res) => {
         descricao: req.body.descricao,
         preco: req.body.preco
     }
-     const registroAfetados = await Usuario.update(dadosJogos, {where: {id: id}})
-      if (registroAfetados > 0) {
+    const registroAfetados = await Usuario.update(dadosJogos, {where: {id: id}})
+    if (registroAfetados > 0) {
         res.redirect("/jogos")
-      } else {
+    } else {
         res.send("Erro ao atualizar Jogo!")
-      }
+    }
 });
 
 app.post("/jogos/excluir", async (req, res) => {
@@ -126,11 +128,11 @@ app.post("/jogos/excluir", async (req, res) => {
     const registroAfetados = await Jogos.destroy({
         where:{ id:id},
     })
-     if (registroAfetados > 0){
+    if (registroAfetados > 0){
         res.redirect("/jogos");
-     } else {
+    } else {
         res.send("Erro ao excluir Jogo.")
-     }
+    }
 });
 
 
@@ -175,6 +177,49 @@ app.post("/usuarios/:id/novoCartao", async (req, res) => {
 
     res.redirect(`/usuarios/${id}/cartoes`);
 });
+
+//Rotas Conquista
+//Ver Conquistas do Usuário
+app.get("/jogo/:id/conquista", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const jogo = await Jogo.findByPk(id, { include: ["Conquistas"] });
+
+    let conquista = jogo.Conquistas;
+    conquista = conquista.map((conquista) => conquista.toJSON())
+
+
+    res.render("conquista.handlebars", { jogo: jogo.toJSON(), conquista });
+});
+
+//Formulário de cadastro de conquista
+app.get("/jogos/{{this.id}}/conquista", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const jogo = await Jogo.findByPk(id, { raw: true });
+
+    res.render("formConquista", { jogo });
+});
+
+//Cadastro de conquista
+app.post("/jogos/{{this.id}}/conquista", async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const dadosConquista = {
+        nomenomeJogador: req.body.nomeJogador,
+        conquistaAdq: req.body.conquistaAdq,
+        UsuarioId: id,
+    };
+
+    await Conquista.create(dadosConquista);
+
+    res.redirect(`/jogos/${id}/conquista`);
+});
+
+
+
+
+
+
+
 
 
 

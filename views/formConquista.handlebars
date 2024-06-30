@@ -1,32 +1,19 @@
 
     <h1>Cadastre-se</h1>
-    <form action="/usuarios/{{usuario.id}}/novoCartao" method="post">
+    <form action="/jogos/{{this.id}}/conquista" method="post">
 
 
         <div>
-            <!--Campo para inserir o titulo-->
-            <label for="numero">Número</label>
-            <input
-    type="text"
-    maxlength="16"
-    minlength="16"
-    id="numero"
-    name="numero"
-    />
+            <!--Campo para inserir a conquista que foi adquirida-->
+            <label for="conquistaAdq">Conquista Adquirida</label>
+            <input type="text" id="conquistaAdq" name="conquistaAdq">
         </div>
 
         <div>
-            <!--Campo para inserir o nome-->
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome">
+            <!--Campo para inserir o nome do jogador-->
+            <label for="nomeJogador">Nome do Jogador</label>
+            <input type="text" id="nomeJogador" name="nomeJogador">
         </div>
-
-        <div>
-            <!--Campo para inserir o titulo-->
-            <label for="codSeguranca">Cod de Segurança</label>
-            <input type="text" id="codSeguranca" name="codSeguranca">
-        </div>
-
 
         <input type="submit" value="Cadastrar" />
     
